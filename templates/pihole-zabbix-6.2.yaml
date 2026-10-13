@@ -1,10 +1,10 @@
 zabbix_export:
   version: '6.2'
   template_groups:
-    - uuid: 7df96b18c230490a9a0a9e2307226338
+    - uuid: 7df96b18c230490a8a0a9e2307226338
       name: Templates
   templates:
-    - uuid: 6b20e2fe7c2741c79e13c41f6fbd26b2
+    - uuid: 6b20e2fe7c2741c78e13c41f6fbd26b2
       template: 'APP-Pi-hole by HTTP 6.2'
       name: 'APP-Pi-hole by HTTP 6.2'
       description: |
@@ -19,7 +19,7 @@ zabbix_export:
       groups:
         - name: Templates
       items:
-        - uuid: 7a994d8ea9b0444e92b5f6f98018945e
+        - uuid: 7a994d8ea9b0444e82b5f6f98018945e
           name: Pi-hole API collection successful
           type: DEPENDENT
           key: pihole.collector.ok
@@ -38,7 +38,7 @@ zabbix_export:
           tags:
             - tag: component
               value: health
-        - uuid: 303f7c1c45534d6f92e57fb01af59ecf
+        - uuid: 303f7c1c45534d6f82e57fb01af59ecf
           name: 'Active clients'
           type: DEPENDENT
           key: pihole.clients.active
@@ -52,7 +52,7 @@ zabbix_export:
           tags:
             - tag: component
               value: environment
-        - uuid: ae5f373b5e3949f0b786d671baa74932
+        - uuid: ae5f373b5e3949f08786d671baa74932
           name: 'Total clients'
           type: DEPENDENT
           key: pihole.clients.total
@@ -66,7 +66,7 @@ zabbix_export:
           tags:
             - tag: component
               value: environment
-        - uuid: e48fe06ba47344f0a6cc844a131bab20
+        - uuid: e48fe06ba47344f086cc844a131bab20
           name: 'DHCP status'
           type: DEPENDENT
           key: pihole.dhcp.status
@@ -81,7 +81,7 @@ zabbix_export:
             - tag: component
               value: health
           triggers:
-            - uuid: 561c436b87264092b288ad5f7fbdd769
+            - uuid: 561c436b872640928288ad5f7fbdd769
               expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.dhcp.status)<>"enabled" and  length(last(/APP-Pi-hole by HTTP 6.2/pihole.dhcp.status))>0'
               name: 'DHCP is disabled'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
@@ -91,7 +91,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: availability
-        - uuid: d8b19e6f52144c1b97d5de37081a4ab0
+        - uuid: d8b19e6f52144c1b87d5de37081a4ab0
           name: 'DNSSEC status'
           type: DEPENDENT
           key: pihole.dnssec.status
@@ -108,7 +108,7 @@ zabbix_export:
             - tag: component
               value: health
           triggers:
-            - uuid: baeb4bd11aac4c66b6feb817f1b4ff65
+            - uuid: baeb4bd11aac4c6686feb817f1b4ff65
               expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.dnssec.status)<>"true" and  length(last(/APP-Pi-hole by HTTP 6.2/pihole.dnssec.status))>0'
               name: 'DNSSEC is disabled'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
@@ -118,7 +118,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: security
-        - uuid: a85322cd5ae6498c9a2ae5762772c2c5
+        - uuid: a85322cd5ae6498c8a2ae5762772c2c5
           name: 'Get errors'
           type: DEPENDENT
           key: pihole.get.errors
@@ -139,7 +139,7 @@ zabbix_export:
             - tag: component
               value: health
           triggers:
-            - uuid: 76c64931fd224450b81937901a89f108
+            - uuid: 76c64931fd224450881937901a89f108
               expression: 'length(last(/APP-Pi-hole by HTTP 6.2/pihole.get.errors))>0'
               name: 'There are errors in requests to API'
               opdata: '{ITEM.LASTVALUE1}'
@@ -148,7 +148,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: availability
-        - uuid: 24671418c48c46aaa70d081821e1c4b9
+        - uuid: 24671418c48c46aa870d081821e1c4b9
           name: 'Get message serverity'
           type: DEPENDENT
           key: pihole.get.messages
@@ -226,7 +226,7 @@ zabbix_export:
             - tag: component
               value: health
           triggers:
-            - uuid: 0f1eda6fac53470ba54ece8e40d2a1a4
+            - uuid: 0f1eda6fac53470b854ece8e40d2a1a4
               expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.get.messages)=2'
               name: 'Message severity Error'
               priority: HIGH
@@ -360,7 +360,7 @@ zabbix_export:
           tags:
             - tag: component
               value: raw
-        - uuid: 3d26ab7c288a43e4bf435f0988a9bbfa
+        - uuid: 3d26ab7c288a43e48f435f0988a9bbfa
           name: 'Domains on blocklist'
           type: DEPENDENT
           key: pihole.gravity.domains_being_blocked
@@ -406,7 +406,7 @@ zabbix_export:
               value: dns
             - tag: scope
               value: stats
-        - uuid: a480693be7964f6ebf00e5d8aa4aff7f
+        - uuid: a480693be7964f6e8f00e5d8aa4aff7f
           name: 'Top domain'
           type: DEPENDENT
           key: pihole.gravity.top_domain
@@ -422,7 +422,7 @@ zabbix_export:
               value: dns
             - tag: scope
               value: stats
-        - uuid: 2e4a019b06bb4188a6166d31a8cf8804
+        - uuid: 2e4a019b06bb418886166d31a8cf8804
           name: 'Queries blocked'
           type: DEPENDENT
           key: pihole.queries.blocked
@@ -438,7 +438,7 @@ zabbix_export:
               value: dns
             - tag: scope
               value: stats
-        - uuid: 556252a7f2ff47a6aa61c63391807eea
+        - uuid: 556252a7f2ff47a68a61c63391807eea
           name: 'Queries cached'
           type: DEPENDENT
           key: pihole.queries.cached
@@ -454,7 +454,7 @@ zabbix_export:
               value: dns
             - tag: scope
               value: stats
-        - uuid: bd7f499cfe784584b90eab28b4574216
+        - uuid: bd7f499cfe784584890eab28b4574216
           name: 'Queries forwarded'
           type: DEPENDENT
           key: pihole.queries.forwarded
@@ -470,7 +470,7 @@ zabbix_export:
               value: dns
             - tag: scope
               value: stats
-        - uuid: c4a294c81fb0432cb1b3ac5dbbcaad96
+        - uuid: c4a294c81fb0432c81b3ac5dbbcaad96
           name: 'Queries blocked in %'
           type: DEPENDENT
           key: pihole.queries.pblocked
@@ -531,7 +531,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-replies
-        - uuid: b7d50996e81042cfb1d69614fa04fae3
+        - uuid: b7d50996e81042cf81d69614fa04fae3
           name: 'Query reply: DNSSEC'
           type: DEPENDENT
           key: pihole.queries.replies_dnssec
@@ -548,7 +548,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-replies
-        - uuid: 2b5e12684ba64fe290383aa3af5d78b7
+        - uuid: 2b5e12684ba64fe280383aa3af5d78b7
           name: 'Query reply: DOMAIN'
           type: DEPENDENT
           key: pihole.queries.replies_domain
@@ -565,7 +565,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-replies
-        - uuid: 6a325492d66b4d2d92a23d70538624e6
+        - uuid: 6a325492d66b4d2d82a23d70538624e6
           name: 'Query reply: IP'
           type: DEPENDENT
           key: pihole.queries.replies_ip
@@ -582,7 +582,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-replies
-        - uuid: c8a677d867ff4cb0a2c8ba6f25fb23cf
+        - uuid: c8a677d867ff4cb082c8ba6f25fb23cf
           name: 'Query reply: NODATA'
           type: DEPENDENT
           key: pihole.queries.replies_nodata
@@ -634,7 +634,7 @@ zabbix_export:
             - tag: targetvalue
               value: dns-replies
           triggers:
-            - uuid: 7eea4e0df89c40bcbe6973ce6a437152
+            - uuid: 7eea4e0df89c40bc8e6973ce6a437152
               expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_notimp)>1'
               name: 'NOTIMP DNS replies detected'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
@@ -678,7 +678,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-replies
-        - uuid: 564750ae9b5d46eba3540a5038486fb3
+        - uuid: 564750ae9b5d46eb83540a5038486fb3
           name: 'Query reply: REFUSED'
           type: DEPENDENT
           key: pihole.queries.replies_refused
@@ -705,7 +705,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: security
-        - uuid: 7e8413adb18b43c9bc3f2561793e870a
+        - uuid: 7e8413adb18b43c98c3f2561793e870a
           name: 'Query reply: RRNAME'
           type: DEPENDENT
           key: pihole.queries.replies_rrname
@@ -722,7 +722,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-replies
-        - uuid: a2b35ecacca64454aca83473d5aee060
+        - uuid: a2b35ecacca644548ca83473d5aee060
           name: 'Query reply: SERVFAIL'
           type: DEPENDENT
           key: pihole.queries.replies_servfail
@@ -776,7 +776,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: security
-        - uuid: c840be865a174394b5858fc2c67cf69c
+        - uuid: c840be865a17439485858fc2c67cf69c
           name: 'Total queries'
           type: DEPENDENT
           key: pihole.queries.total
@@ -792,7 +792,7 @@ zabbix_export:
               value: dns
             - tag: scope
               value: stats
-        - uuid: 78d401357e5643519eca0b8dbb81a20c
+        - uuid: 78d401357e5643518eca0b8dbb81a20c
           name: 'Query type: A'
           type: DEPENDENT
           key: pihole.queries.type_a
@@ -826,7 +826,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: 59aa6fd35baf4dfabb7338c06c0ae5a4
+        - uuid: 59aa6fd35baf4dfa8b7338c06c0ae5a4
           name: 'Query type: ANY'
           type: DEPENDENT
           key: pihole.queries.type_any
@@ -843,7 +843,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: e68a1ba9576449a3b79c1fd772434537
+        - uuid: e68a1ba9576449a3879c1fd772434537
           name: 'Query type: DNSKEY'
           type: DEPENDENT
           key: pihole.queries.type_dnskey
@@ -860,7 +860,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: 818533d0133540b6a7bbb63700830e7d
+        - uuid: 818533d0133540b687bbb63700830e7d
           name: 'Query type: DS'
           type: DEPENDENT
           key: pihole.queries.type_ds
@@ -877,7 +877,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: 8e0323212a5c4708acf73a1a55f17386
+        - uuid: 8e0323212a5c47088cf73a1a55f17386
           name: 'Query type: HTTPS'
           type: DEPENDENT
           key: pihole.queries.type_https
@@ -894,7 +894,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: 23ca3036923149179e84a7769c333ce8
+        - uuid: 23ca3036923149178e84a7769c333ce8
           name: 'Query type: MX'
           type: DEPENDENT
           key: pihole.queries.type_mx
@@ -962,7 +962,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: 20eca8a7f2b14640bf4a10d3798c138b
+        - uuid: 20eca8a7f2b146408f4a10d3798c138b
           name: 'Query type: PTR'
           type: DEPENDENT
           key: pihole.queries.type_ptr
@@ -978,7 +978,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: ce4545a7683e47fdbf5d4910aa6e40b6
+        - uuid: ce4545a7683e47fd8f5d4910aa6e40b6
           name: 'Query type: RRSIG'
           type: DEPENDENT
           key: pihole.queries.type_rrsig
@@ -995,7 +995,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: 625366f404b3426895e875b8dff86edb
+        - uuid: 625366f404b3426885e875b8dff86edb
           name: 'Query type: SOA'
           type: DEPENDENT
           key: pihole.queries.type_soa
@@ -1012,7 +1012,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: d62518984bce4da4b61b8ab3a9c1918f
+        - uuid: d62518984bce4da4861b8ab3a9c1918f
           name: 'Query type: SRV'
           type: DEPENDENT
           key: pihole.queries.type_srv
@@ -1029,7 +1029,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: 0dbb40ea24fa402790dc150d0705a488
+        - uuid: 0dbb40ea24fa402780dc150d0705a488
           name: 'Query type: SVCB'
           type: DEPENDENT
           key: pihole.queries.type_svcb
@@ -1046,7 +1046,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: 80b1ded4f7e34c83be10e0d1efd6a6df
+        - uuid: 80b1ded4f7e34c838e10e0d1efd6a6df
           name: 'Query type: TXT'
           type: DEPENDENT
           key: pihole.queries.type_txt
@@ -1063,7 +1063,7 @@ zabbix_export:
               value: dns
             - tag: targetvalue
               value: dns-queries
-        - uuid: 77a86d9d18004673ae18ef5ad99f7724
+        - uuid: 77a86d9d180046738e18ef5ad99f7724
           name: 'Unique domains'
           type: DEPENDENT
           key: pihole.queries.unique_domains
@@ -1077,7 +1077,7 @@ zabbix_export:
           tags:
             - tag: component
               value: environment
-        - uuid: 55ae162bc7684c719a0cf6df5f437cf3
+        - uuid: 55ae162bc7684c718a0cf6df5f437cf3
           name: 'Blocking status'
           type: DEPENDENT
           key: pihole.status.blocking
@@ -1104,7 +1104,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: security
-        - uuid: 444d2380b9534cccac26812f89d4db4b
+        - uuid: 444d2380b9534ccc8c26812f89d4db4b
           name: 'CPU temperature'
           type: DEPENDENT
           key: pihole.system.cpu.temp
@@ -1121,7 +1121,7 @@ zabbix_export:
               value: cpu
             - tag: component
               value: health
-        - uuid: 33ed5399a31f4120a454e478fa35c4fb
+        - uuid: 33ed5399a31f41208454e478fa35c4fb
           name: 'CPU utilization'
           type: DEPENDENT
           key: pihole.system.cpu.util
@@ -1139,7 +1139,7 @@ zabbix_export:
             - tag: scope
               value: performance
           triggers:
-            - uuid: 150821a21b094a7cbad01dbeb90bc14d
+            - uuid: 150821a21b094a7c8ad01dbeb90bc14d
               expression: 'min(/APP-Pi-hole by HTTP 6.2/pihole.system.cpu.util,5m)>{$PIHOLE.SYSTEM.CPU.MAX.WARN}'
               name: 'High CPU usage'
               event_name: 'High CPU usage (over {$PIHOLE.SYSTEM.CPU.MAX.WARN}% use)'
@@ -1164,7 +1164,7 @@ zabbix_export:
           tags:
             - tag: component
               value: memory
-        - uuid: 286ae24c68674325a43ff8825dae070a
+        - uuid: 286ae24c68674325843ff8825dae070a
           name: 'Free memory'
           type: DEPENDENT
           key: pihole.system.ram.free
@@ -1179,7 +1179,7 @@ zabbix_export:
           tags:
             - tag: component
               value: memory
-        - uuid: 0d6d8fe936b74f8ba85991df2704d202
+        - uuid: 0d6d8fe936b74f8b885991df2704d202
           name: 'Used memory in %'
           type: DEPENDENT
           key: pihole.system.ram.pused
@@ -1198,7 +1198,7 @@ zabbix_export:
             - tag: scope
               value: performance
           triggers:
-            - uuid: 4327050a1f16442694e812d6209b8cef
+            - uuid: 4327050a1f16442684e812d6209b8cef
               expression: 'min(/APP-Pi-hole by HTTP 6.2/pihole.system.ram.pused,5m)>{$PIHOLE.SYSTEM.MEMORY.MAX.WARN}'
               name: 'High memory utilization'
               event_name: 'High memory usage (over {$PIHOLE.SYSTEM.MEMORY.MAX.WARN}% use)'
@@ -1222,7 +1222,7 @@ zabbix_export:
           tags:
             - tag: component
               value: memory
-        - uuid: 9d9b194d101c44e4b6f1b3dafbb2768d
+        - uuid: 9d9b194d101c44e486f1b3dafbb2768d
           name: 'Used memory'
           type: DEPENDENT
           key: pihole.system.ram.used
@@ -1237,7 +1237,7 @@ zabbix_export:
           tags:
             - tag: component
               value: memory
-        - uuid: 44ed21bd257341cabb9633342debc7fb
+        - uuid: 44ed21bd257341ca8b9633342debc7fb
           name: 'Free swap'
           type: DEPENDENT
           key: pihole.system.swap.free
@@ -1275,7 +1275,7 @@ zabbix_export:
             - tag: scope
               value: performance
           triggers:
-            - uuid: d5e9990c06a0475a9f9340a4d7eea7d9
+            - uuid: d5e9990c06a0475a8f9340a4d7eea7d9
               expression: 'min(/APP-Pi-hole by HTTP 6.2/pihole.system.swap.pused,5)>{$PIHOLE.SYSTEM.SWAP.MAX.WARN}'
               name: 'High swap utilization'
               event_name: 'High swap usage (over {$PIHOLE.SYSTEM.SWAP.MAX.WARN}% use)'
@@ -1284,7 +1284,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: performance
-        - uuid: fe57befeb0534216b9ee44a54fc4def2
+        - uuid: fe57befeb053421689ee44a54fc4def2
           name: 'Total swap'
           type: DEPENDENT
           key: pihole.system.swap.total
@@ -1318,7 +1318,7 @@ zabbix_export:
               value: memory
             - tag: component
               value: storage
-        - uuid: 5abfe5bb173f42b4be9d045c4239495d
+        - uuid: 5abfe5bb173f42b48e9d045c4239495d
           name: Uptime
           type: DEPENDENT
           key: pihole.system.uptime
@@ -1349,7 +1349,7 @@ zabbix_export:
             - tag: component
               value: system
           triggers:
-            - uuid: e8a2461d76414606bf0c8c26e47c93c6
+            - uuid: e8a2461d764146068f0c8c26e47c93c6
               expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.version.core,#1)<>last(/APP-Pi-hole by HTTP 6.2/pihole.version.core,#2) and length(last(/APP-Pi-hole by HTTP 6.2/pihole.version.core))>0'
               name: 'Core Version has changed'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
@@ -1358,7 +1358,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: notice
-        - uuid: 2bcf26992b3a44f6a4b3e2c889654276
+        - uuid: 2bcf26992b3a44f684b3e2c889654276
           name: 'Version Docker'
           type: DEPENDENT
           key: pihole.version.docker
@@ -1374,7 +1374,7 @@ zabbix_export:
             - tag: component
               value: system
           triggers:
-            - uuid: ac11f9e37c6b4b82a58b47e14d9e769c
+            - uuid: ac11f9e37c6b4b82858b47e14d9e769c
               expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.version.docker,#1)<>last(/APP-Pi-hole by HTTP 6.2/pihole.version.docker,#2) and length(last(/APP-Pi-hole by HTTP 6.2/pihole.version.docker))>0'
               name: 'Docker Version has changed'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
@@ -1383,7 +1383,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: notice
-        - uuid: eeba600c68334be0aeadd9466f8a4f9e
+        - uuid: eeba600c68334be08eadd9466f8a4f9e
           name: 'Version FTL'
           type: DEPENDENT
           key: pihole.version.ftl
@@ -1399,7 +1399,7 @@ zabbix_export:
             - tag: component
               value: system
           triggers:
-            - uuid: 55ad14dbd22e439aab633e1f8f2f7cd4
+            - uuid: 55ad14dbd22e439a8b633e1f8f2f7cd4
               expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.version.ftl,#1)<>last(/APP-Pi-hole by HTTP 6.2/pihole.version.ftl,#2) and length(last(/APP-Pi-hole by HTTP 6.2/pihole.version.ftl))>0'
               name: 'FTL Version has changed'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
@@ -1408,7 +1408,7 @@ zabbix_export:
               tags:
                 - tag: scope
                   value: notice
-        - uuid: 95300d09f3634ea9a1d7e27fe48ab060
+        - uuid: 95300d09f3634ea981d7e27fe48ab060
           name: 'Version Web'
           type: DEPENDENT
           key: pihole.version.web
@@ -1424,7 +1424,7 @@ zabbix_export:
             - tag: component
               value: system
           triggers:
-            - uuid: ba2b2a7a2aef4b68afe083787785da46
+            - uuid: ba2b2a7a2aef4b688fe083787785da46
               expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.version.web,#1)<>last(/APP-Pi-hole by HTTP 6.2/pihole.version.web,#2) and length(last(/APP-Pi-hole by HTTP 6.2/pihole.version.web))>0'
               name: 'Web Version has changed'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
@@ -1455,7 +1455,7 @@ zabbix_export:
           value: '90'
           description: 'Default: 90'
       valuemaps:
-        - uuid: 2e7575a540974f26ae2b474cef4359e7
+        - uuid: 2e7575a540974f268e2b474cef4359e7
           name: 'Message severity'
           mappings:
             - value: '1'
@@ -1465,7 +1465,7 @@ zabbix_export:
             - value: '0'
               newvalue: 'No error'
   triggers:
-    - uuid: abcde12345f678900000000000000001
+    - uuid: abcde12345f648908000000000000001
       expression: 'nodata(/APP-Pi-hole by HTTP 6.2/pihole.get.metrics,3m)=1'
       name: 'Pi-hole: no API metrics received for 3 minutes'
       priority: DISASTER
@@ -1473,7 +1473,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: availability
-    - uuid: abcde12345f678900000000000000002
+    - uuid: abcde12345f648908000000000000002
       expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.collector.ok)=0'
       name: 'Pi-hole: API metrics collection failed'
       priority: HIGH
@@ -1481,7 +1481,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: availability
-    - uuid: abcde12345f678900000000000000003
+    - uuid: abcde12345f648908000000000000003
       expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.collector.ok,3m)=0 and count(/APP-Pi-hole by HTTP 6.2/pihole.collector.ok,3m)>=2'
       name: 'Pi-hole: no valid DNS statistics for 3 minutes'
       priority: DISASTER
@@ -1489,7 +1489,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: availability
-    - uuid: abcde12345f678900000000000000004
+    - uuid: abcde12345f648908000000000000004
       expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,3m)=min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,3m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,3m)>=3 and last(/APP-Pi-hole by HTTP 6.2/pihole.collector.ok)=1'
       name: 'Pi-hole: no DNS queries processed for 3 minutes'
       priority: HIGH
@@ -1497,7 +1497,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: availability
-    - uuid: abcde12345f678900000000000000005
+    - uuid: abcde12345f648908000000000000005
       expression: 'nodata(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,3m)=1'
       name: 'Pi-hole: DNS query stats missing for 3 minutes'
       priority: HIGH
@@ -1505,7 +1505,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: availability
-    - uuid: abcde12345f678900000000000000006
+    - uuid: abcde12345f648908000000000000006
       expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_servfail,5m)>min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_servfail,5m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_servfail,5m)>=2'
       name: 'Pi-hole: SERVFAIL DNS failures increasing'
       priority: HIGH
@@ -1513,7 +1513,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: availability
-    - uuid: abcde12345f678900000000000000007
+    - uuid: abcde12345f648908000000000000007
       expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_refused,5m)>min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_refused,5m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_refused,5m)>=2'
       name: 'Pi-hole: REFUSED DNS failures increasing'
       priority: WARNING
@@ -1521,7 +1521,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: availability
-    - uuid: abcde12345f678900000000000000008
+    - uuid: abcde12345f648908000000000000008
       expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_notimp,5m)>min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_notimp,5m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_notimp,5m)>=2'
       name: 'Pi-hole: NOTIMP DNS failures increasing'
       priority: WARNING
@@ -1529,7 +1529,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: availability
-    - uuid: abcde12345f678900000000000000009
+    - uuid: abcde12345f648908000000000000009
       expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_unknown,5m)>min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_unknown,5m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_unknown,5m)>=2'
       name: 'Pi-hole: UNKNOWN DNS failures increasing'
       priority: WARNING
@@ -1537,7 +1537,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: availability
-    - uuid: eca830be7b1f4b5299b0383edfe76081
+    - uuid: eca830be7b1f4b5289b0383edfe76081
       expression: '((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,5m)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,5m))/(300))>1 and (((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_nodata,1h)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_nodata,1h))/(3600))/((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,1h)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,1h))/(3600))) > 0.6'
       name: 'Unusual high NODATA rate'
       opdata: 'Current value: {ITEM.LASTVALUE1}'
@@ -1556,7 +1556,7 @@ zabbix_export:
       tags:
         - tag: scope
           value: security
-    - uuid: 0837596e26fc4eb894ff8f54e7eb3df5
+    - uuid: 0837596e26fc4eb884ff8f54e7eb3df5
       expression: '((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,5m)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,5m))/(300))>1 and (((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_nxdomain,15m)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_nxdomain,15m))/(900))/((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,15m)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,15m))/(900))) > 0.6'
       name: 'Unusual high NXDOMAIN rate'
       opdata: 'Current value: {ITEM.LASTVALUE1}'
@@ -1607,7 +1607,7 @@ zabbix_export:
           item:
             host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.system.ram.total
-    - uuid: 94f37b640d9e40cfa2b1c5c24ab47781
+    - uuid: 94f37b640d9e40cf82b1c5c24ab47781
       name: 'Queries Upstream'
       graph_items:
         - color: FF0000
@@ -1634,7 +1634,7 @@ zabbix_export:
           item:
             host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.total
-    - uuid: d6a7971ee18a48c1b4d4ead0c3c9da33
+    - uuid: d6a7971ee18a48c184d4ead0c3c9da33
       name: 'Query replies'
       graph_items:
         - color: 199C0D
@@ -1720,7 +1720,7 @@ zabbix_export:
           item:
             host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_unknown
-    - uuid: 5686e17983674e7bb3db277af98d4ec4
+    - uuid: 5686e17983674e7b83db277af98d4ec4
       name: 'Query types'
       graph_items:
         - color: 199C0D
@@ -1818,7 +1818,7 @@ zabbix_export:
           item:
             host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_txt
-    - uuid: 647115dcbcc94ebb94205cd9aaf7e6ae
+    - uuid: 647115dcbcc94ebb84205cd9aaf7e6ae
       name: Swap
       graph_items:
         - color: 199C0D
