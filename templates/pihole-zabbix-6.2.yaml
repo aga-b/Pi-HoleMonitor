@@ -1,8 +1,8 @@
 zabbix_export:
   version: '6.2'
   template_groups:
-    - uuid: 7df96b18c230490a8a0a9e2307226338
-      name: Templates
+    - uuid: 5b318de83a584821a6e0ce85a88ac671
+      name: 'Templates/Pi-HoleMonitor'
   templates:
     - uuid: 6b20e2fe7c2741c78e13c41f6fbd26b2
       template: 'APP-Pi-hole by HTTP 6.2'
@@ -17,7 +17,7 @@ zabbix_export:
         
         Author: MannixTT
       groups:
-        - name: Templates
+        - name: 'Templates/Pi-HoleMonitor'
       items:
         - uuid: 7a994d8ea9b0444e82b5f6f98018945e
           name: Pi-hole API collection successful
