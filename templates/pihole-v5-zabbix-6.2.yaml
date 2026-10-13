@@ -5,8 +5,8 @@ zabbix_export:
       name: 'Templates/Pi-HoleMonitor-v5'
   templates:
     - uuid: 00000000000241b2a3d4e5f6a7b8c9d0
-      template: 'APP-Pi-hole v5 by HTTP (Zabbix 6.2)'
-      name: 'APP-Pi-hole v5 by HTTP (Zabbix 6.2)'
+      template: 'Pi-hole-v5-HTTP'
+      name: 'Pi-hole-v5-HTTP'
       description: |
         Pi-hole v5 legacy /admin/api.php?summaryRaw monitor.
         Zabbix 6.2; 1-minute HTTP polling; no API credential by default.
@@ -160,22 +160,22 @@ zabbix_export:
           description: 'Set Pi-hole v5 web address and exposed port (e.g. http://10.41.41.253:49000/admin/api.php?summaryRaw)'
   triggers:
     - uuid: 00000000000f41b2a3d4e5f6a7b8c9d0
-      expression: 'nodata(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.get.summary,3m)=1'
+      expression: 'nodata(/Pi-hole-v5-HTTP/pihole.v5.get.summary,3m)=1'
       name: 'Pi-hole v5: no API response for 3 minutes'
       priority: DISASTER
     - uuid: 00000000001041b2a3d4e5f6a7b8c9d0
-      expression: 'last(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.api.ok)=0'
+      expression: 'last(/Pi-hole-v5-HTTP/pihole.v5.api.ok)=0'
       name: 'Pi-hole v5: API response invalid'
       priority: HIGH
     - uuid: 00000000001141b2a3d4e5f6a7b8c9d0
-      expression: 'last(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.status)<>"enabled"'
+      expression: 'last(/Pi-hole-v5-HTTP/pihole.v5.status)<>"enabled"'
       name: 'Pi-hole v5: DNS blocking disabled'
       priority: AVERAGE
     - uuid: 00000000001241b2a3d4e5f6a7b8c9d0
-      expression: 'min(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.queries.total,3m)=max(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.queries.total,3m) and count(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.queries.total,3m)>=3 and last(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.api.ok)=1'
+      expression: 'min(/Pi-hole-v5-HTTP/pihole.v5.queries.total,3m)=max(/Pi-hole-v5-HTTP/pihole.v5.queries.total,3m) and count(/Pi-hole-v5-HTTP/pihole.v5.queries.total,3m)>=3 and last(/Pi-hole-v5-HTTP/pihole.v5.api.ok)=1'
       name: 'Pi-hole v5: no DNS query processing observed for 3 minutes'
       priority: HIGH
     - uuid: 00000000001341b2a3d4e5f6a7b8c9d0
-      expression: 'nodata(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.queries.total,3m)=1'
+      expression: 'nodata(/Pi-hole-v5-HTTP/pihole.v5.queries.total,3m)=1'
       name: 'Pi-hole v5: DNS query stats missing 3 minutes'
       priority: HIGH
