@@ -125,3 +125,7 @@ Check the API response before importing: `curl -sS 'http://10.41.41.253:49000/ad
 Monitors query totals, blocked queries/percentage, cache, forwarding, domain and client counts, blocking status, API validity, and 3-minute no-data / query-stagnation conditions. **A quiet client network also produces query-stagnation alarms; this is not proof that DNS is down.** Since v5 `summaryRaw` does not expose all DNS errors or establish that UDP/TCP port 53 answers queries, SERVFAIL growth and active DNS-resolution tests are not included. Add active DNS checks from a separate probe host if failure detection must be conclusive.
 
 Live Zabbix import and Pi-hole API integration tests have not been run. Never put Pi-hole admin passwords or API tokens in repository URLs, exported templates, or issue logs.
+
+### Pi-hole v5 DNS failure counters
+
+The v5 `summaryRaw` response includes `reply_SERVFAIL`, `reply_REFUSED`, `reply_NOTIMP` and `reply_UNKNOWN`. These are monitored every minute. A trigger fires when the newest count is larger than the previous sampled count (`last() > last(#2)`), not simply when the cumulative counter is nonzero. The monitor does not directly test UDP/TCP 53; add an external active resolver test for definitive DNS availability. The supplied legacy endpoint did not require an API token.
