@@ -154,6 +154,50 @@ zabbix_export:
                   } catch (e) { return 0; }
           master_item:
             key: pihole.v5.get.summary
+        - uuid: 43b7ea8e6c1f4a29a70f0000000001e
+          name: 'DNS replies: SERVFAIL'
+          type: DEPENDENT
+          key: pihole.v5.replies.servfail
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.reply_SERVFAIL'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 43b7ea8e6c1f4a29a70f0000000001f
+          name: 'DNS replies: REFUSED'
+          type: DEPENDENT
+          key: pihole.v5.replies.refused
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.reply_REFUSED'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 43b7ea8e6c1f4a29a70f00000000020
+          name: 'DNS replies: NOTIMP'
+          type: DEPENDENT
+          key: pihole.v5.replies.notimp
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.reply_NOTIMP'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 43b7ea8e6c1f4a29a70f00000000021
+          name: 'DNS replies: UNKNOWN'
+          type: DEPENDENT
+          key: pihole.v5.replies.unknown
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.reply_UNKNOWN'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
       macros:
         - macro: '{$PIHOLE.V5.API.URL}'
           value: 'http://127.0.0.1/admin/api.php?summaryRaw'
@@ -179,3 +223,23 @@ zabbix_export:
       expression: 'nodata(/Pi-hole-v5-HTTP/pihole.v5.queries.total,3m)=1'
       name: 'Pi-hole v5: DNS query stats missing 3 minutes'
       priority: HIGH
+    - uuid: 43b7ea8e6c1f4a29a70f00000000022
+      expression: 'last(/Pi-hole-v5-HTTP/pihole.v5.replies.servfail)>last(/Pi-hole-v5-HTTP/pihole.v5.replies.servfail,#2)'
+      name: 'Pi-hole v5: SERVFAIL DNS replies increasing'
+      priority: HIGH
+      description: 'DNS SERVFAIL reply cumulative counter increased since previous sample. Resets are not classified as increases.'
+    - uuid: 43b7ea8e6c1f4a29a70f00000000023
+      expression: 'last(/Pi-hole-v5-HTTP/pihole.v5.replies.refused)>last(/Pi-hole-v5-HTTP/pihole.v5.replies.refused,#2)'
+      name: 'Pi-hole v5: REFUSED DNS replies increasing'
+      priority: WARNING
+      description: 'DNS REFUSED reply cumulative counter increased since previous sample. Resets are not classified as increases.'
+    - uuid: 43b7ea8e6c1f4a29a70f00000000024
+      expression: 'last(/Pi-hole-v5-HTTP/pihole.v5.replies.notimp)>last(/Pi-hole-v5-HTTP/pihole.v5.replies.notimp,#2)'
+      name: 'Pi-hole v5: NOTIMP DNS replies increasing'
+      priority: WARNING
+      description: 'DNS NOTIMP reply cumulative counter increased since previous sample. Resets are not classified as increases.'
+    - uuid: 43b7ea8e6c1f4a29a70f00000000025
+      expression: 'last(/Pi-hole-v5-HTTP/pihole.v5.replies.unknown)>last(/Pi-hole-v5-HTTP/pihole.v5.replies.unknown,#2)'
+      name: 'Pi-hole v5: UNKNOWN DNS replies increasing'
+      priority: WARNING
+      description: 'DNS UNKNOWN reply cumulative counter increased since previous sample. Resets are not classified as increases.'
