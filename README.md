@@ -115,3 +115,13 @@ Bu paket `APP-Pi-hole by HTTP` adlı, Pi-hole v6 REST API (`/api`) kullanan mevc
 ### Zabbix 6.2 dashboard compatibility
 
 Zabbix 6.2 does not support the newer Zabbix 7.4 dashboard widget types (`item`, `piechart`, `svggraph`, `gauge`, `honeycomb`). The 6.2 export intentionally omits the dashboard block while retaining monitored items, triggers, value maps, and classic graphs. Build a dashboard locally with widgets supported by Zabbix 6.2 if desired. Import is not yet verified on a live Zabbix instance.
+
+## Pi-hole v5 (legacy API) — Zabbix 6.2
+
+Pi-hole v5 uses `/admin/api.php`, not the Pi-hole v6 `/api/auth` REST endpoint. For v5 installations, import [pihole-v5-zabbix-6.2.yaml](templates/pihole-v5-zabbix-6.2.yaml) **instead of** the v6 template. It polls `?summaryRaw` every minute via HTTP agent; set `{$PIHOLE.V5.API.URL}` to the server URL and published web port, e.g. `http://10.41.41.253:49000/admin/api.php?summaryRaw`.
+
+Check the API response before importing: `curl -sS 'http://10.41.41.253:49000/admin/api.php?summaryRaw'`. It should contain a numeric `dns_queries_today` and `status` field. Some Pi-hole v5 installs may restrict the endpoint; adjust authentication outside the template only after verification.
+
+Monitors query totals, blocked queries/percentage, cache, forwarding, domain and client counts, blocking status, API validity, and 3-minute no-data / query-stagnation conditions. **A quiet client network also produces query-stagnation alarms; this is not proof that DNS is down.** Since v5 `summaryRaw` does not expose all DNS errors or establish that UDP/TCP port 53 answers queries, SERVFAIL growth and active DNS-resolution tests are not included. Add active DNS checks from a separate probe host if failure detection must be conclusive.
+
+Live Zabbix import and Pi-hole API integration tests have not been run. Never put Pi-hole admin passwords or API tokens in repository URLs, exported templates, or issue logs.
