@@ -112,3 +112,6 @@ Bu paket `APP-Pi-hole by HTTP` adlı, Pi-hole v6 REST API (`/api`) kullanan mevc
 - İki eski `rate()` istatistik ifadesi Zabbix 6.2 ile daha kolay taşınabilecek `max - min` yaklaşımına dönüştürüldü.
 - Yeni `pihole.collector.ok` dependent item ve 9 yeni DNS/API tetikleyicisi eklendi.
 - Swap CPU benzeri mevcut alarmda `min(...,5)` (5 saniye) kullanımı `min(...,5m)` olarak düzeltildi.
+### Zabbix 6.2 dashboard compatibility
+
+Zabbix 6.2 does not support the newer Zabbix 7.4 dashboard widget types (`item`, `piechart`, `svggraph`, `gauge`, `honeycomb`). The 6.2 export intentionally omits the dashboard block while retaining monitored items, triggers, value maps, and classic graphs. Build a dashboard locally with widgets supported by Zabbix 6.2 if desired. Import is not yet verified on a live Zabbix instance.
