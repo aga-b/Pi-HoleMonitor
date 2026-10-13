@@ -1,0 +1,181 @@
+zabbix_export:
+  version: '6.2'
+  template_groups:
+    - uuid: 00000000000141b2a3d4e5f6a7b8c9d0
+      name: 'Templates/Pi-HoleMonitor-v5'
+  templates:
+    - uuid: 00000000000241b2a3d4e5f6a7b8c9d0
+      template: 'APP-Pi-hole v5 by HTTP (Zabbix 6.2)'
+      name: 'APP-Pi-hole v5 by HTTP (Zabbix 6.2)'
+      description: |
+        Pi-hole v5 legacy /admin/api.php?summaryRaw monitor.
+        Zabbix 6.2; 1-minute HTTP polling; no API credential by default.
+        DNS inactivity can also indicate zero client traffic.
+      groups:
+        - name: 'Templates/Pi-HoleMonitor-v5'
+      items:
+        - uuid: 00000000000341b2a3d4e5f6a7b8c9d0
+          name: 'Get Pi-hole v5 API summary'
+          type: HTTP_AGENT
+          key: pihole.v5.get.summary
+          delay: 1m
+          history: 1d
+          value_type: TEXT
+          url: '{$PIHOLE.V5.API.URL}'
+          status_codes: '200'
+          timeout: 10s
+          tags:
+            - tag: component
+              value: raw
+        - uuid: 00000000000441b2a3d4e5f6a7b8c9d0
+          name: 'Total DNS queries'
+          type: DEPENDENT
+          key: pihole.v5.queries.total
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.dns_queries_today'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000541b2a3d4e5f6a7b8c9d0
+          name: 'Blocked DNS queries'
+          type: DEPENDENT
+          key: pihole.v5.queries.blocked
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.ads_blocked_today'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000641b2a3d4e5f6a7b8c9d0
+          name: 'Blocked DNS queries (%)'
+          type: DEPENDENT
+          key: pihole.v5.queries.pblocked
+          value_type: FLOAT
+          units: '%'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.ads_percentage_today'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000741b2a3d4e5f6a7b8c9d0
+          name: 'Cached queries'
+          type: DEPENDENT
+          key: pihole.v5.queries.cached
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.queries_cached'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000841b2a3d4e5f6a7b8c9d0
+          name: 'Forwarded queries'
+          type: DEPENDENT
+          key: pihole.v5.queries.forwarded
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.queries_forwarded'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000941b2a3d4e5f6a7b8c9d0
+          name: 'Domains on blocklist'
+          type: DEPENDENT
+          key: pihole.v5.gravity.domains
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.domains_being_blocked'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000a41b2a3d4e5f6a7b8c9d0
+          name: 'Unique domains'
+          type: DEPENDENT
+          key: pihole.v5.domains.unique
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.unique_domains'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000b41b2a3d4e5f6a7b8c9d0
+          name: 'Unique clients'
+          type: DEPENDENT
+          key: pihole.v5.clients.unique
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.unique_clients'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000c41b2a3d4e5f6a7b8c9d0
+          name: 'Clients ever seen'
+          type: DEPENDENT
+          key: pihole.v5.clients.total
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.clients_ever_seen'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000d41b2a3d4e5f6a7b8c9d0
+          name: 'Blocking status'
+          type: DEPENDENT
+          key: pihole.v5.status
+          value_type: TEXT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.status'
+              error_handler: DISCARD_VALUE
+          master_item:
+            key: pihole.v5.get.summary
+        - uuid: 00000000000e41b2a3d4e5f6a7b8c9d0
+          name: 'API summary validity'
+          type: DEPENDENT
+          key: pihole.v5.api.ok
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  try {
+                    var d = JSON.parse(value);
+                    return (typeof d.dns_queries_today === 'number' && typeof d.status === 'string') ? 1 : 0;
+                  } catch (e) { return 0; }
+          master_item:
+            key: pihole.v5.get.summary
+      macros:
+        - macro: '{$PIHOLE.V5.API.URL}'
+          value: 'http://127.0.0.1/admin/api.php?summaryRaw'
+          description: 'Set Pi-hole v5 web address and exposed port (e.g. http://10.41.41.253:49000/admin/api.php?summaryRaw)'
+  triggers:
+    - uuid: 00000000000f41b2a3d4e5f6a7b8c9d0
+      expression: 'nodata(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.get.summary,3m)=1'
+      name: 'Pi-hole v5: no API response for 3 minutes'
+      priority: DISASTER
+    - uuid: 00000000001041b2a3d4e5f6a7b8c9d0
+      expression: 'last(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.api.ok)=0'
+      name: 'Pi-hole v5: API response invalid'
+      priority: HIGH
+    - uuid: 00000000001141b2a3d4e5f6a7b8c9d0
+      expression: 'last(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.status)<>"enabled"'
+      name: 'Pi-hole v5: DNS blocking disabled'
+      priority: AVERAGE
+    - uuid: 00000000001241b2a3d4e5f6a7b8c9d0
+      expression: 'min(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.queries.total,3m)=max(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.queries.total,3m) and count(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.queries.total,3m)>=3 and last(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.api.ok)=1'
+      name: 'Pi-hole v5: no DNS query processing observed for 3 minutes'
+      priority: HIGH
+    - uuid: 00000000001341b2a3d4e5f6a7b8c9d0
+      expression: 'nodata(/APP-Pi-hole v5 by HTTP (Zabbix 6.2)/pihole.v5.queries.total,3m)=1'
+      name: 'Pi-hole v5: DNS query stats missing 3 minutes'
+      priority: HIGH
