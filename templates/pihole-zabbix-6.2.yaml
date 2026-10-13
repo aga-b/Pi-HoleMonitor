@@ -4,9 +4,9 @@ zabbix_export:
     - uuid: 7df96b18c230490a9a0a9e2307226338
       name: Templates
   templates:
-    - uuid: b14588fd2ff342cea14e56fbe53876e6
-      template: 'APP-Pi-hole by HTTP'
-      name: 'APP-Pi-hole by HTTP'
+    - uuid: 6b20e2fe7c2741c79e13c41f6fbd26b2
+      template: 'APP-Pi-hole by HTTP 6.2'
+      name: 'APP-Pi-hole by HTTP 6.2'
       description: |
         Get Pi-hole metrics by HTTP agent from the new REST API.
         
@@ -82,7 +82,7 @@ zabbix_export:
               value: health
           triggers:
             - uuid: 561c436b87264092b288ad5f7fbdd769
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.dhcp.status)<>"enabled" and  length(last(/APP-Pi-hole by HTTP/pihole.dhcp.status))>0'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.dhcp.status)<>"enabled" and  length(last(/APP-Pi-hole by HTTP 6.2/pihole.dhcp.status))>0'
               name: 'DHCP is disabled'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: HIGH
@@ -109,7 +109,7 @@ zabbix_export:
               value: health
           triggers:
             - uuid: baeb4bd11aac4c66b6feb817f1b4ff65
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.dnssec.status)<>"true" and  length(last(/APP-Pi-hole by HTTP/pihole.dnssec.status))>0'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.dnssec.status)<>"true" and  length(last(/APP-Pi-hole by HTTP 6.2/pihole.dnssec.status))>0'
               name: 'DNSSEC is disabled'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: WARNING
@@ -140,7 +140,7 @@ zabbix_export:
               value: health
           triggers:
             - uuid: 76c64931fd224450b81937901a89f108
-              expression: 'length(last(/APP-Pi-hole by HTTP/pihole.get.errors))>0'
+              expression: 'length(last(/APP-Pi-hole by HTTP 6.2/pihole.get.errors))>0'
               name: 'There are errors in requests to API'
               opdata: '{ITEM.LASTVALUE1}'
               priority: HIGH
@@ -227,12 +227,12 @@ zabbix_export:
               value: health
           triggers:
             - uuid: 0f1eda6fac53470ba54ece8e40d2a1a4
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.get.messages)=2'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.get.messages)=2'
               name: 'Message severity Error'
               priority: HIGH
               description: 'Check your pi-hole diagnostics'
             - uuid: 2466dd0f1c9142c483878a5f8d36c5af
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.get.messages)=1'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.get.messages)=1'
               name: 'Message severity Warning'
               priority: WARNING
               description: 'Check your pi-hole diagnostics'
@@ -490,7 +490,7 @@ zabbix_export:
               value: stats
           triggers:
             - uuid: cce30722a8034b968e5c762f920960ef
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.queries.pblocked)<15'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.queries.pblocked)<15'
               name: 'Low percentage of blocked queries'
               opdata: 'Current blocked queries in %: {ITEM.LASTVALUE1}'
               priority: WARNING
@@ -635,7 +635,7 @@ zabbix_export:
               value: dns-replies
           triggers:
             - uuid: 7eea4e0df89c40bcbe6973ce6a437152
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.queries.replies_notimp)>1'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_notimp)>1'
               name: 'NOTIMP DNS replies detected'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: HIGH
@@ -697,7 +697,7 @@ zabbix_export:
               value: dns-replies
           triggers:
             - uuid: ea50d50edea744b9884c834aa5b20d0c
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.queries.replies_refused)>1'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_refused)>1'
               name: 'REFUSED DNS replies detected'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: HIGH
@@ -741,7 +741,7 @@ zabbix_export:
               value: dns-replies
           triggers:
             - uuid: b3691acc409b49fd8d6b3029cb67901b
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.queries.replies_servfail)>1'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_servfail)>1'
               name: 'SERVFAIL DNS replies detected'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: HIGH
@@ -768,7 +768,7 @@ zabbix_export:
               value: dns-replies
           triggers:
             - uuid: e978baacd91c40db862103459134e2da
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.queries.replies_unknown)>1'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_unknown)>1'
               name: 'UNKNOWN DNS replies detected'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: HIGH
@@ -1095,7 +1095,7 @@ zabbix_export:
               value: health
           triggers:
             - uuid: a0feaf55fc1945e48ef18414de7df542
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.status.blocking)<>"enabled" and length(last(/APP-Pi-hole by HTTP/pihole.status.blocking))>0'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.status.blocking)<>"enabled" and length(last(/APP-Pi-hole by HTTP 6.2/pihole.status.blocking))>0'
               name: 'Blocking is disabled'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: AVERAGE
@@ -1143,7 +1143,7 @@ zabbix_export:
               value: performance
           triggers:
             - uuid: 150821a21b094a7cbad01dbeb90bc14d
-              expression: 'min(/APP-Pi-hole by HTTP/pihole.system.cpu.util,5m)>{$PIHOLE.SYSTEM.CPU.MAX.WARN}'
+              expression: 'min(/APP-Pi-hole by HTTP 6.2/pihole.system.cpu.util,5m)>{$PIHOLE.SYSTEM.CPU.MAX.WARN}'
               name: 'High CPU usage'
               event_name: 'High CPU usage (over {$PIHOLE.SYSTEM.CPU.MAX.WARN}% use)'
               opdata: 'Current use: {ITEM.LASTVALUE1}'
@@ -1202,7 +1202,7 @@ zabbix_export:
               value: performance
           triggers:
             - uuid: 4327050a1f16442694e812d6209b8cef
-              expression: 'min(/APP-Pi-hole by HTTP/pihole.system.ram.pused,5m)>{$PIHOLE.SYSTEM.MEMORY.MAX.WARN}'
+              expression: 'min(/APP-Pi-hole by HTTP 6.2/pihole.system.ram.pused,5m)>{$PIHOLE.SYSTEM.MEMORY.MAX.WARN}'
               name: 'High memory utilization'
               event_name: 'High memory usage (over {$PIHOLE.SYSTEM.MEMORY.MAX.WARN}% use)'
               opdata: 'Current use: {ITEM.LASTVALUE1}'
@@ -1279,7 +1279,7 @@ zabbix_export:
               value: performance
           triggers:
             - uuid: d5e9990c06a0475a9f9340a4d7eea7d9
-              expression: 'min(/APP-Pi-hole by HTTP/pihole.system.swap.pused,5)>{$PIHOLE.SYSTEM.SWAP.MAX.WARN}'
+              expression: 'min(/APP-Pi-hole by HTTP 6.2/pihole.system.swap.pused,5)>{$PIHOLE.SYSTEM.SWAP.MAX.WARN}'
               name: 'High swap utilization'
               event_name: 'High swap usage (over {$PIHOLE.SYSTEM.SWAP.MAX.WARN}% use)'
               opdata: 'Current use: {ITEM.LASTVALUE1}'
@@ -1353,7 +1353,7 @@ zabbix_export:
               value: system
           triggers:
             - uuid: e8a2461d76414606bf0c8c26e47c93c6
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.version.core,#1)<>last(/APP-Pi-hole by HTTP/pihole.version.core,#2) and length(last(/APP-Pi-hole by HTTP/pihole.version.core))>0'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.version.core,#1)<>last(/APP-Pi-hole by HTTP 6.2/pihole.version.core,#2) and length(last(/APP-Pi-hole by HTTP 6.2/pihole.version.core))>0'
               name: 'Core Version has changed'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: INFO
@@ -1378,7 +1378,7 @@ zabbix_export:
               value: system
           triggers:
             - uuid: ac11f9e37c6b4b82a58b47e14d9e769c
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.version.docker,#1)<>last(/APP-Pi-hole by HTTP/pihole.version.docker,#2) and length(last(/APP-Pi-hole by HTTP/pihole.version.docker))>0'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.version.docker,#1)<>last(/APP-Pi-hole by HTTP 6.2/pihole.version.docker,#2) and length(last(/APP-Pi-hole by HTTP 6.2/pihole.version.docker))>0'
               name: 'Docker Version has changed'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: INFO
@@ -1403,7 +1403,7 @@ zabbix_export:
               value: system
           triggers:
             - uuid: 55ad14dbd22e439aab633e1f8f2f7cd4
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.version.ftl,#1)<>last(/APP-Pi-hole by HTTP/pihole.version.ftl,#2) and length(last(/APP-Pi-hole by HTTP/pihole.version.ftl))>0'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.version.ftl,#1)<>last(/APP-Pi-hole by HTTP 6.2/pihole.version.ftl,#2) and length(last(/APP-Pi-hole by HTTP 6.2/pihole.version.ftl))>0'
               name: 'FTL Version has changed'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: INFO
@@ -1428,7 +1428,7 @@ zabbix_export:
               value: system
           triggers:
             - uuid: ba2b2a7a2aef4b68afe083787785da46
-              expression: 'last(/APP-Pi-hole by HTTP/pihole.version.web,#1)<>last(/APP-Pi-hole by HTTP/pihole.version.web,#2) and length(last(/APP-Pi-hole by HTTP/pihole.version.web))>0'
+              expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.version.web,#1)<>last(/APP-Pi-hole by HTTP 6.2/pihole.version.web,#2) and length(last(/APP-Pi-hole by HTTP 6.2/pihole.version.web))>0'
               name: 'Web Version has changed'
               opdata: 'Current value: {ITEM.LASTVALUE1}'
               priority: INFO
@@ -1469,7 +1469,7 @@ zabbix_export:
               newvalue: 'No error'
   triggers:
     - uuid: abcde12345f678900000000000000001
-      expression: 'nodata(/APP-Pi-hole by HTTP/pihole.get.metrics,3m)=1'
+      expression: 'nodata(/APP-Pi-hole by HTTP 6.2/pihole.get.metrics,3m)=1'
       name: 'Pi-hole: no API metrics received for 3 minutes'
       priority: DISASTER
       description: 'No raw API metrics received for 3 minutes.'
@@ -1477,7 +1477,7 @@ zabbix_export:
         - tag: scope
           value: availability
     - uuid: abcde12345f678900000000000000002
-      expression: 'last(/APP-Pi-hole by HTTP/pihole.collector.ok)=0'
+      expression: 'last(/APP-Pi-hole by HTTP 6.2/pihole.collector.ok)=0'
       name: 'Pi-hole: API metrics collection failed'
       priority: HIGH
       description: 'REST API authentication, reachability or query-statistics retrieval failed.'
@@ -1485,7 +1485,7 @@ zabbix_export:
         - tag: scope
           value: availability
     - uuid: abcde12345f678900000000000000003
-      expression: 'max(/APP-Pi-hole by HTTP/pihole.collector.ok,3m)=0 and count(/APP-Pi-hole by HTTP/pihole.collector.ok,3m)>=2'
+      expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.collector.ok,3m)=0 and count(/APP-Pi-hole by HTTP 6.2/pihole.collector.ok,3m)>=2'
       name: 'Pi-hole: no valid DNS statistics for 3 minutes'
       priority: DISASTER
       description: 'No valid query statistics during 3-minute sampling window.'
@@ -1493,7 +1493,7 @@ zabbix_export:
         - tag: scope
           value: availability
     - uuid: abcde12345f678900000000000000004
-      expression: 'max(/APP-Pi-hole by HTTP/pihole.queries.total,3m)=min(/APP-Pi-hole by HTTP/pihole.queries.total,3m) and count(/APP-Pi-hole by HTTP/pihole.queries.total,3m)>=3 and last(/APP-Pi-hole by HTTP/pihole.collector.ok)=1'
+      expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,3m)=min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,3m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,3m)>=3 and last(/APP-Pi-hole by HTTP 6.2/pihole.collector.ok)=1'
       name: 'Pi-hole: no DNS queries processed for 3 minutes'
       priority: HIGH
       description: 'No increase in query total for 3 minutes. An idle resolver may also produce this alert.'
@@ -1501,7 +1501,7 @@ zabbix_export:
         - tag: scope
           value: availability
     - uuid: abcde12345f678900000000000000005
-      expression: 'nodata(/APP-Pi-hole by HTTP/pihole.queries.total,3m)=1'
+      expression: 'nodata(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,3m)=1'
       name: 'Pi-hole: DNS query stats missing for 3 minutes'
       priority: HIGH
       description: 'Dependent query-total item stopped receiving samples.'
@@ -1509,7 +1509,7 @@ zabbix_export:
         - tag: scope
           value: availability
     - uuid: abcde12345f678900000000000000006
-      expression: 'max(/APP-Pi-hole by HTTP/pihole.queries.replies_servfail,5m)>min(/APP-Pi-hole by HTTP/pihole.queries.replies_servfail,5m) and count(/APP-Pi-hole by HTTP/pihole.queries.replies_servfail,5m)>=2'
+      expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_servfail,5m)>min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_servfail,5m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_servfail,5m)>=2'
       name: 'Pi-hole: SERVFAIL DNS failures increasing'
       priority: HIGH
       description: 'DNS error count increased in a five-minute window.'
@@ -1517,7 +1517,7 @@ zabbix_export:
         - tag: scope
           value: availability
     - uuid: abcde12345f678900000000000000007
-      expression: 'max(/APP-Pi-hole by HTTP/pihole.queries.replies_refused,5m)>min(/APP-Pi-hole by HTTP/pihole.queries.replies_refused,5m) and count(/APP-Pi-hole by HTTP/pihole.queries.replies_refused,5m)>=2'
+      expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_refused,5m)>min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_refused,5m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_refused,5m)>=2'
       name: 'Pi-hole: REFUSED DNS failures increasing'
       priority: WARNING
       description: 'DNS error count increased in a five-minute window.'
@@ -1525,7 +1525,7 @@ zabbix_export:
         - tag: scope
           value: availability
     - uuid: abcde12345f678900000000000000008
-      expression: 'max(/APP-Pi-hole by HTTP/pihole.queries.replies_notimp,5m)>min(/APP-Pi-hole by HTTP/pihole.queries.replies_notimp,5m) and count(/APP-Pi-hole by HTTP/pihole.queries.replies_notimp,5m)>=2'
+      expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_notimp,5m)>min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_notimp,5m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_notimp,5m)>=2'
       name: 'Pi-hole: NOTIMP DNS failures increasing'
       priority: WARNING
       description: 'DNS error count increased in a five-minute window.'
@@ -1533,7 +1533,7 @@ zabbix_export:
         - tag: scope
           value: availability
     - uuid: abcde12345f678900000000000000009
-      expression: 'max(/APP-Pi-hole by HTTP/pihole.queries.replies_unknown,5m)>min(/APP-Pi-hole by HTTP/pihole.queries.replies_unknown,5m) and count(/APP-Pi-hole by HTTP/pihole.queries.replies_unknown,5m)>=2'
+      expression: 'max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_unknown,5m)>min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_unknown,5m) and count(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_unknown,5m)>=2'
       name: 'Pi-hole: UNKNOWN DNS failures increasing'
       priority: WARNING
       description: 'DNS error count increased in a five-minute window.'
@@ -1541,7 +1541,7 @@ zabbix_export:
         - tag: scope
           value: availability
     - uuid: eca830be7b1f4b5299b0383edfe76081
-      expression: '((max(/APP-Pi-hole by HTTP/pihole.queries.total,5m)-min(/APP-Pi-hole by HTTP/pihole.queries.total,5m))/(300))>1 and (((max(/APP-Pi-hole by HTTP/pihole.queries.replies_nodata,1h)-min(/APP-Pi-hole by HTTP/pihole.queries.replies_nodata,1h))/(3600))/((max(/APP-Pi-hole by HTTP/pihole.queries.total,1h)-min(/APP-Pi-hole by HTTP/pihole.queries.total,1h))/(3600))) > 0.6'
+      expression: '((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,5m)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,5m))/(300))>1 and (((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_nodata,1h)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_nodata,1h))/(3600))/((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,1h)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,1h))/(3600))) > 0.6'
       name: 'Unusual high NODATA rate'
       opdata: 'Current value: {ITEM.LASTVALUE1}'
       priority: HIGH
@@ -1560,7 +1560,7 @@ zabbix_export:
         - tag: scope
           value: security
     - uuid: 0837596e26fc4eb894ff8f54e7eb3df5
-      expression: '((max(/APP-Pi-hole by HTTP/pihole.queries.total,5m)-min(/APP-Pi-hole by HTTP/pihole.queries.total,5m))/(300))>1 and (((max(/APP-Pi-hole by HTTP/pihole.queries.replies_nxdomain,15m)-min(/APP-Pi-hole by HTTP/pihole.queries.replies_nxdomain,15m))/(900))/((max(/APP-Pi-hole by HTTP/pihole.queries.total,15m)-min(/APP-Pi-hole by HTTP/pihole.queries.total,15m))/(900))) > 0.6'
+      expression: '((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,5m)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,5m))/(300))>1 and (((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_nxdomain,15m)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.replies_nxdomain,15m))/(900))/((max(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,15m)-min(/APP-Pi-hole by HTTP 6.2/pihole.queries.total,15m))/(900))) > 0.6'
       name: 'Unusual high NXDOMAIN rate'
       opdata: 'Current value: {ITEM.LASTVALUE1}'
       priority: HIGH
@@ -1589,26 +1589,26 @@ zabbix_export:
         - color: 199C0D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.system.ram.available
         - sortorder: '1'
           color: F63100
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.system.ram.free
         - sortorder: '2'
           color: F7941D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.system.ram.used
         - sortorder: '3'
           drawtype: FILLED_REGION
           color: 2774A4
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.system.ram.total
     - uuid: 94f37b640d9e40cfa2b1c5c24ab47781
       name: 'Queries Upstream'
@@ -1616,26 +1616,26 @@ zabbix_export:
         - color: FF0000
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.blocked
         - sortorder: '1'
           color: 80FF00
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.cached
         - sortorder: '2'
           color: 00FFFF
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.forwarded
         - sortorder: '3'
           drawtype: FILLED_REGION
           color: '666699'
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.total
     - uuid: d6a7971ee18a48c1b4d4ead0c3c9da33
       name: 'Query replies'
@@ -1643,85 +1643,85 @@ zabbix_export:
         - color: 199C0D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_blob
         - sortorder: '1'
           color: F63100
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_cname
         - sortorder: '2'
           color: 2774A4
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_dnssec
         - sortorder: '3'
           color: F7941D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_domain
         - sortorder: '4'
           color: FC6EA3
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_ip
         - sortorder: '5'
           color: 6C59DC
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_nodata
         - sortorder: '6'
           color: C7A72D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_none
         - sortorder: '7'
           color: BA2A5D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_notimp
         - sortorder: '8'
           color: F230E0
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_nxdomain
         - sortorder: '9'
           color: 5CCD18
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_other
         - sortorder: '10'
           color: BB2A02
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_refused
         - sortorder: '11'
           color: AC41A5
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_rrname
         - sortorder: '12'
           color: 89ABF8
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_servfail
         - sortorder: '13'
           color: 7EC25C
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.replies_unknown
     - uuid: 5686e17983674e7bb3db277af98d4ec4
       name: 'Query types'
@@ -1729,97 +1729,97 @@ zabbix_export:
         - color: 199C0D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_a
         - sortorder: '1'
           color: F63100
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_aaaa
         - sortorder: '2'
           color: 2774A4
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_any
         - sortorder: '3'
           color: F7941D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_dnskey
         - sortorder: '4'
           color: FC6EA3
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_ds
         - sortorder: '5'
           color: 6C59DC
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_https
         - sortorder: '6'
           color: C7A72D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_mx
         - sortorder: '7'
           color: BA2A5D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_naptr
         - sortorder: '8'
           color: F230E0
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_ns
         - sortorder: '9'
           color: 5CCD18
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_other
         - sortorder: '10'
           color: BB2A02
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_ptr
         - sortorder: '11'
           color: AC41A5
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_rrsig
         - sortorder: '12'
           color: 89ABF8
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_soa
         - sortorder: '13'
           color: 7EC25C
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_srv
         - sortorder: '14'
           color: 3165D5
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_svcb
         - sortorder: '15'
           color: 79A277
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.queries.type_txt
     - uuid: 647115dcbcc94ebb94205cd9aaf7e6ae
       name: Swap
@@ -1827,18 +1827,18 @@ zabbix_export:
         - color: 199C0D
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.system.swap.free
         - sortorder: '1'
           drawtype: FILLED_REGION
           color: F63100
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.system.swap.total
         - sortorder: '2'
           color: 2774A4
           calc_fnc: ALL
           item:
-            host: 'APP-Pi-hole by HTTP'
+            host: 'APP-Pi-hole by HTTP 6.2'
             key: pihole.system.swap.used
