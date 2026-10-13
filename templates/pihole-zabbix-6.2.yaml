@@ -47,6 +47,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.active_clients
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -61,6 +62,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.clients.total
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -75,6 +77,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.config.dhcp_active
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -100,6 +103,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.config.dns_dnssec
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -157,6 +161,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.messages.messages
+              error_handler: DISCARD_VALUE
             - type: JAVASCRIPT
               parameters:
                 - |
@@ -270,21 +275,21 @@ zabbix_export:
                         throw 'Login failed with status code ' + request.getStatus() + ': ' + response;
                     }
             
+                    var jsonResponse;
                     try {
-                        var jsonResponse = JSON.parse(response);
-                        if (jsonResponse.session && jsonResponse.session.message === "password incorrect") {
-                            throw 'Authentication failed: Incorrect password.';
-                        }
-            
-                        if (!jsonResponse.session || !jsonResponse.session.sid) {
-                            throw 'Authentication response does not contain a valid session ID (SID).';
-                        }
-            
-                        Pihole.sid = jsonResponse.session.sid;
-            
+                        jsonResponse = JSON.parse(response);
                     } catch (error) {
-                        throw 'Failed to parse authentication response: ' + error;
+                        var excerpt = String(response).slice(0, 120).replace(/\s+/g, ' ');
+                        throw 'Authentication endpoint returned non-JSON (HTTP ' + request.getStatus() +
+                              '). Check Pi-hole API URL, web port and reverse proxy /api routing. Response begins: ' + excerpt;
                     }
+                    if (jsonResponse.error) {
+                        throw 'Pi-hole authentication error: ' + (jsonResponse.error.message || JSON.stringify(jsonResponse.error));
+                    }
+                    if (!jsonResponse.session || !jsonResponse.session.sid) {
+                        throw 'Authentication response lacks session.sid (HTTP ' + request.getStatus() + ').';
+                    }
+                    Pihole.sid = jsonResponse.session.sid;
                 },
             
                 request: function (url) {
@@ -369,6 +374,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.gravity_size
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -383,6 +389,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.top_blocked
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -399,6 +406,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.top_client
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -415,6 +423,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.top_domain
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -431,6 +440,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.blocked
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -447,6 +457,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.cached
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -463,6 +474,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.forwarded
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -481,6 +493,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.percent_blocked
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -507,6 +520,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.BLOB
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -524,6 +538,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.CNAME
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -541,6 +556,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.DNSSEC
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -558,6 +574,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.DOMAIN
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -575,6 +592,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.IP
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -592,6 +610,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.NODATA
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -609,6 +628,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.NONE
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -626,6 +646,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.NOTIMP
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -654,6 +675,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.NXDOMAIN
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -671,6 +693,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.OTHER
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -688,6 +711,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.REFUSED
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -715,6 +739,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.RRNAME
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -732,6 +757,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.SERVFAIL
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -759,6 +785,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.replies.UNKNOWN
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -785,6 +812,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.total
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -802,6 +830,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.A
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -819,6 +848,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.AAAA
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -836,6 +866,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.ANY
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -853,6 +884,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.DNSKEY
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -870,6 +902,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.DS
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -887,6 +920,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.HTTPS
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -904,6 +938,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.MX
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -921,6 +956,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.NAPTR
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -938,6 +974,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.NS
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -955,6 +992,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.OTHER
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -971,6 +1009,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.PTR
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -988,6 +1027,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.RRSIG
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1005,6 +1045,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.SOA
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1022,6 +1063,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.SRV
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1039,6 +1081,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.SVCB
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1056,6 +1099,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.types.TXT
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1072,6 +1116,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.summary.queries.unique_domains
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1086,6 +1131,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.blocking
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1114,6 +1160,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.sensors.cpu_temp
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1131,6 +1178,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.padd.system.cpu[''%cpu'']'
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1159,6 +1207,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.system.memory.ram.available
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1174,6 +1223,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.system.memory.ram.free
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1190,6 +1240,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.padd.system.memory.ram[''%used'']'
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1217,6 +1268,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.system.memory.ram.total
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1232,6 +1284,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.system.memory.ram.used
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1247,6 +1300,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.system.memory.swap.free
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1265,6 +1319,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - '$.data.padd.system.memory.swap[''%used'']'
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1294,6 +1349,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.system.memory.swap.total
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1311,6 +1367,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.system.memory.swap.used
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1328,6 +1385,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.system.uptime
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1343,6 +1401,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.version.core.local.version
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1368,6 +1427,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.version.web.local.version
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1393,6 +1453,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.version.ftl.local.version
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
@@ -1418,6 +1479,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.data.padd.version.web.local.version
+              error_handler: DISCARD_VALUE
           master_item:
             key: pihole.get.metrics
           tags:
